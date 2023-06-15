@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="/Make/appointment/update" method="post">
+    <h1>Make Appointment</h1>
+    <label for="">Date And Time:</label>
+
+    <select name="disponibility_id" class="form-control">
+        {%for i in dispo  %}
+        <option value="{{i.id}}">{{i.day}} / From {{i.start_time}} To {{i.end_time}}</option>
+        {%endfor%}
+        </select>
+        
+    
+    <h2>Pricing</h2>
+    
+    {%for cer in service%}
+    <label>{{cer.service_name}} / {{cer.description}} /  {{cer.Price}}</label>
+    <input type="checkbox" id="{{cer.id}}" name="service_id" value="{{cer.id}}">
+<br>
+    {%endfor%}
+<input type="submit" value="Confirm Appointment" class="btn btn-secondary">
+    </form>
+</body>
+</html>

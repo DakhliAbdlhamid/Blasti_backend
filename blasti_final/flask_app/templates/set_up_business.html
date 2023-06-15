@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Up Your Business</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        select, input[type="text"], input[type="file"], input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .button-container {
+            text-align: center;
+        }
+        
+        .button-container button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .button-container button:hover {
+            background-color: #45a049;
+        }
+        
+        .service-inputs-container input[type="text"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .service-inputs-container input[type="text"]:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Set Up Your Business</h1>
+    <form action="/setup/time_images" method="POST" enctype="multipart/form-data">
+        
+        <div>
+            <label for="days">Select days:</label>
+            <select id="day" name="day" multiple>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+                <option value="sunday">Sunday</option>
+            </select>
+        </div>
+        <div class="button-container">
+            <button type="button" onclick="createIntervalInputs()">Create Interval Inputs</button>
+        </div>
+        <div id="intervalInputsContainer"></div>
+        
+        
+        <label for="images">Choose a picture:</label>
+        <input type="file" id="images" name="images" >
+        
+
+        <div class="service-inputs-container">
+            <input type="text" placeholder="Service 1" name="service_name">
+            <input type="text" placeholder="Service 2" name="service_name">
+            <input type="text" placeholder="Service 3" name="service_name">
+        </div>
+
+        <div class="button-container">
+            <button type="button" onclick="addServiceInput()">Add Service Input</button>
+        </div>
+        
+        <div class="button-container">
+            <a href="/business/profile"><button type="button">Submit</button></a>
+            <!-- <input type="submit" value="Submit"> -->
+        </div>
+    </form>
+
+    <script>
+        function createIntervalInputs() {
+            var selectedDays = Array.from(document.getElementById("day").selectedOptions, option => option.value);
+            var intervalInputsContainer = document.getElementById("intervalInputsContainer");
+    
+            selectedDays.forEach(function (day) {
+                var option = document.querySelector('option[value="' + day + '"]');
+                option.disabled = true;
+    
+                var label = document.createElement("label");
+                label.textContent = day.charAt(0).toUpperCase() + day.slice(1) + ": ";
+                
+                var startHourInput = document.createElement("input");
+                startHourInput.type = "time";
+                startHourInput.name = `${day}-start_time`;
+    
+                var endHourInput = document.createElement("input");
+                endHourInput.type = "time";
+                endHourInput.name = `${day}-end_time`;
+                console.log(`${day}-start_time` , `${day}-end_time \n`);
+                intervalInputsContainer.appendChild(label);
+                intervalInputsContainer.appendChild(startHourInput);
+                intervalInputsContainer.appendChild(document.createTextNode(" to "));
+                intervalInputsContainer.appendChild(endHourInput);
+                intervalInputsContainer.appendChild(document.createElement("br"));
+            });
+        }
+    
+        var serviceInputCount = 3;
+    
+        function addServiceInput() {
+            var serviceInputsContainer = document.getElementsByClassName("service-inputs-container")[0];
+    
+            var newInput = document.createElement("input");
+            newInput.type = "text";
+            newInput.placeholder = "Service " + (serviceInputCount + 1);
+            newInput.name = "service_name";
+        
+            serviceInputsContainer.appendChild(newInput);
+            serviceInputsContainer.appendChild(document.createElement("br"));
+        
+            serviceInputCount++;
+        }
+    </script>
+
+    <!-- <div class="row">
+
+        <div class="span6">
+            <form method="POST">
+                
+                <label for="date">Pick a date</label>
+                <input type="date" name="date" id="date">
+                <br>
+                
+                <label for="start_time">start time</label>
+                <input type="time" id="time" name="start_time">
+                <br>
+
+                <label for="end_time">end time</label>
+                <input type="time" id="time" name="end_time">
+                <br>
+
+                <input type="submit" value="Add Date">
+            </form>
+        </div>
+    </div> -->
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+        <a href="/logout" class="btn btn-danger">LOGOUT</a>
+        <h1>My Appointments</h1>
+        {%for bui in business%}
+        {{bui.name}}
+                <div style="display: flex; justify-content: space-around;">
+        <a href="appointments/{{bui.id}}/edit" class="btn btn-secondary">Edit</a>
+        <a href="/businesses/{{bui.id}}/destroy" class="btn btn-secondary">Cancel</a></div>
+        {%endfor%}
+
+
+        <h2>My Favorites</h2>
+        {%for bui in favorites%}
+        {{bui.favorite.name}}
+        <div style="display: flex; justify-content: space-around;">
+                <a href="/appointments/new/{{bui.business_id}}" class="btn btn-secondary">Get an Appointment</a>
+        <a href="/show" class="btn btn-secondary">View More</a></div>
+        {%endfor%}
+</body>
+</html>

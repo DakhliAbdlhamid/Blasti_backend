@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Main Page</title>
+</head>
+
+<body>
+    <div class="row text-center p-4">
+        <h4>You Made It 😁 {{user.first_name}}</h4>
+        <a href="/logout" class="btn btn-danger">LOGOUT</a>
+    </div>
+    <h1>Category</h1>
+    <a href="/category/page" class="btn btn-warning">See all</a>
+
+    {%for cat in categories%}
+    <tr>
+        <a href="/category/{{cat.id}}"><td>{{cat.name}}</td></a>
+    </tr>
+    {%endfor%}
+
+    <h1>My Appointments</h1>
+    {%for bui in business%}
+
+    {{bui.name}}
+    <a href="/appointments/{{bui.id}}/edit" class="btn btn-secondary">Edit</a>
+
+    <a href="/businesses/{{bui.id}}/destroy" class="btn btn-secondary">Cancel</a>
+    
+    {%endfor%}
+    <div style="display: flex;">
+        
+        <a href="/dashboard" class="btn btn-secondary">See All</a>
+    </div>
+</body>
+
+</html>

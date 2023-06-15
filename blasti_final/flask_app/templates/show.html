@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <a href="/logout" class="btn btn-danger">LOGOUT</a>
+<h1>
+    {%for bui in businesses%}
+    {{bui.name}}
+    {%endfor%}
+</h1>
+
+<div>
+    {%for img in images%}
+
+    {{bui.image}}
+    {%endfor%}
+</div>
+
+<div>
+    {%for desc in businesses%}
+
+    {{desc.description}}
+    {%endfor%}
+</div>
+
+    <h2>Contact Info</h2>
+
+<div>
+    {%for desc in businesses%}
+
+    {{desc.adresse_id}}
+    {%endfor%}
+</div>
+
+<div>
+    {%for desc in businesses%}
+
+    {{desc.phone}}
+    {%endfor%}
+
+</div>
+
+<div>
+
+    {%for desc in businesses%}
+
+    {{desc.email}}
+    {%endfor%}
+
+</div>
+
+<div>
+    {%for cer in service%}
+    {{cer.name}}
+    <a href="/appointments/new" class="btn btn-secondary">Get an Appointment</a>
+
+
+    {%endfor%}
+
+</div>
+
+
+    {%for user in users%}<br>
+
+<div>  {{user.name}}</div>
+<br>
+    {%endfor%}
+
+
+
+<div>
+    {%for rev in service_reviews%}
+
+    {rev.comment}
+    {%endfor%}
+
+</div>
+
+
+    {%for rev in service_reviews%}
+   <div> {rev.rate}</div>
+    {%endfor%}
+
+
+
+
+
+
+</body>
+</html>
